@@ -4,11 +4,16 @@ import data from "./quotes.json";
 import { QuoteProps } from "../types/genericTypes";
 import FadeIn from "react-fade-in";
 // import { Adsense } from "@ctrl/react-adsense";
-import Footer from "./Footer";
 import logo from "./images/google-play.webp";
+import ReactGA from "react-ga";
 
 function App() {
   const [quote, setQuote] = useState<QuoteProps>();
+
+  useEffect(() => {
+    ReactGA.initialize("UA-82044662-7");
+    ReactGA.pageview("/");
+  }, []);
 
   useEffect(() => {
     const newQuote = generateNewQuote();
@@ -26,17 +31,22 @@ function App() {
     <div
       className="App-body"
       onClick={() => {
+        ReactGA.event({
+          category: "User",
+          action: "Generated a new quote",
+        });
         const newQuote = generateNewQuote();
         setQuote(newQuote);
       }}
     >
-      <a
+      <ReactGA.OutboundLink
+        eventLabel="stoic-mind-app-google-play-click"
+        to="https://play.google.com/store/apps/details?id=com.jonnymckenna.stoicmind"
+        target="_blank"
         className="google-play-link"
-        target="_blank "
-        href="https://play.google.com/store/apps/details?id=com.jonnymckenna.stoicmind"
       >
         <img src={logo} alt="Google Play Link for Stoic Mind" />
-      </a>
+      </ReactGA.OutboundLink>
       <div className="App-content">
         {quote && (
           <FadeIn delay={200} transitionDuration={1500}>
@@ -56,7 +66,17 @@ function App() {
             : "on"
         }
       /> */}
-      <Footer />
+
+      <div className="footer">
+        Created by{" "}
+        <ReactGA.OutboundLink
+          eventLabel="jonny-mckenna-website-click"
+          to="https://www.jonnymckenna.com/"
+          target="_blank"
+        >
+          Jonny McKenna
+        </ReactGA.OutboundLink>
+      </div>
     </div>
   );
 }
