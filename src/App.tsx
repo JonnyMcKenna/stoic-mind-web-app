@@ -3,7 +3,7 @@ import "./App.css";
 import data from "./quotes.json";
 import { QuoteProps } from "../types/genericTypes";
 import FadeIn from "react-fade-in";
-import { Adsense } from "@ctrl/react-adsense";
+// import { Adsense } from "@ctrl/react-adsense";
 import Footer from "./Footer";
 import logo from "./images/google-play.webp";
 
@@ -47,7 +47,7 @@ function App() {
           </FadeIn>
         )}
       </div>
-      <Adsense
+      {/* <Adsense
         client="ca-pub-7640562161899788"
         slot="7259870550"
         adTest={
@@ -55,7 +55,7 @@ function App() {
             ? "off"
             : "on"
         }
-      />
+      /> */}
       <Footer />
     </div>
   );
